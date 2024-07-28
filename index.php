@@ -160,11 +160,11 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="?p=user&act=create"><i class="fa fa-circle-o"></i> Buat User </a></li>
+              <li><a href="?p=user&act=create"><i class="fa fa-plus-square"></i> Buat User </a></li>
               <li><a href="?p=user"><i class="fa fa-circle-o"></i> Data User</a></li>
             </ul>
-          </li>
-          <li class="treeview <?= (@$_GET['p']=='karyawan')?'active':'' ?>">
+          </li>	  		  
+<!--          <li class="treeview <?= (@$_GET['p']=='karyawan')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-user-secret"></i> <span>Karyawan</span>
               <span class="pull-right-container">
@@ -175,6 +175,7 @@
               <li><a href="?p=karyawan"><i class="fa fa-circle-o"></i> Data Karyawan</a></li>
             </ul>
           </li>
+-->		  
           <li class="treeview <?= (@$_GET['p']=='periode')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-clock-o"></i> <span>Periode Penilaian</span>
@@ -183,7 +184,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="?p=periode&act=create"><i class="fa fa-circle-o"></i> Tambah data periode </a></li>
+              <li><a href="?p=periode&act=create"><i class="fa fa-plus-square"></i> Tambah data periode </a></li>
               <li><a href="?p=periode"><i class="fa fa-circle-o"></i> Data periode</a></li>
             </ul>
           </li>
@@ -195,22 +196,22 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="?p=criteria&act=create"><i class="fa fa-circle-o"></i> Buat Kinerja</a></li>
+              <li><a href="?p=criteria&act=create"><i class="fa fa-plus-square"></i> Buat Kinerja</a></li>
               <li><a href="?p=criteria"><i class="fa fa-circle-o"></i> Data Kinerja</a></li>
             </ul>
           </li>
           <li class="treeview <?= (@$_GET['p']=='penilaian')?'active':'' ?>">
             <a href="#">
-              <i class="fa fa-list"></i> <span>Penilaian</span>
+              <i class="fa fa-clipboard"></i> <span>Penilaian</span>
               <span class="pull-right-container">
-                <i class="fa fa-th-left pull-right"></i>
+                <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
               <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li>			
               <li><a href="?p=penilaian&act=ponek"><i class="fa fa-circle-o"></i>Penilaian Ponek</a></li>
             </ul>
-          </li>		  
+          </li>			  
  <!--         <li class="<?= (@$_GET['p']=='rank')?'active':'' ?>">
             <a href="?p=rank">
               <i class="fa fa-trophy"></i> <span>Ranking</span>

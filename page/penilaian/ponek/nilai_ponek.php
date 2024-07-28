@@ -7,13 +7,14 @@
 
 
   if (isset($_POST['simpan'])) {
-    $nik = $_POST['nik'];
-    $nama = $_POST['nama'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $level = $_POST['level'];
-
-    $sql = "update pegawai_user set nik='$nik', nama='$nama', username='$username', password='$password', Level='$level' where id_user='$id'";
+    $id_kriteria = $_POST['id_kriteria'];
+    $periode = $_POST['periode'];
+    $tgl_jam = $_POST['tgl_jam'];
+    $nip = $_POST['nip'];
+    $nilai = $_POST['nilai'];
+    $penilai = $_POST['penilai'];	
+	
+	$sql = "insert into pegawai_nilai_kerja values('$id_kriteria', '$periode', '$tgl_jam', '$nip', '$nilai', '$penilai')";
     $query = mysqli_query($con, $sql);
     if ($query) {
       echo "<script>alert('Data berhasil diubah!');window.location.href='index.php?p=user'</script>";
@@ -83,29 +84,30 @@
                     </td>
                 </tr>
                 <tr>
-                    <th style="text-align: left;" width="30%">Nama</th>
+                    <th style="text-align: left;" width="30%">&nbsp;Nama</th>
                     <th width="1%">:</th>
                     <td style="text-align: left;" width="54%"><?= $peg['nama'] ?></td>
                 </tr>
                 <tr>
-                    <th style="text-align: left;" width="30%">NIP</th>
+                    <th style="text-align: left;" width="30%">&nbsp;NIP</th>
                     <th width="1%">:</th>
                     <td style="text-align: left;" width="54%"><?= $peg['nik'] ?></td>
                 </tr>
                 <tr>
-                    <th style="text-align: left;">Jabatan</th>
+                    <th style="text-align: left;">&nbsp;Jabatan</th>
                     <th>:</th>
                     <td style="text-align: left;"><?= $peg['jbtn'] ?></td>
                 </tr>
                 <tr>
-                    <th style="text-align: left;">Mulai Kerja</th>
+                    <th style="text-align: left;">&nbsp;Mulai Kerja</th>
                     <th>:</th>
                     <td style="text-align: left;"><?= $peg['mulai_kerja'] ?></td>
                 </tr>				
-            </table>
+            </table>				
         </div>
     </header>
-    <section>
+<form role="form" method="post">	
+    <section>	
         <table border="1" cellspacing="0" cellpadding="5" style="width: 100%;">
             <tr>
                 <td colspan="9" style="background-color:#005456; color:#fff; text-align: center;font-weight: bold;">
@@ -113,6 +115,18 @@
                 </td>
             </tr>
         </table>
+				<div>	
+					<select name="periode" id="periode" class="form-control input">
+						<?php
+							$query    =mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
+							while ($period = mysqli_fetch_array($query)) {
+						?>
+							<option align="center" value="<?=$period['id_periode'];?>"><?php echo $period['label'];?></option>
+						<?php
+							}
+						?>
+					</select>
+				</div>		
         <table border="1" cellspacing="0" cellpadding="4" style="width: 100%;">
             <tr bgcolor="#f3f2f2">
                 <td rowspan="3" width="3%" style="font-size: 13px;" align="center">NO</td>
@@ -138,15 +152,24 @@
                 <td colspan="6"><b>Sikap Kerja<b></td>	
             </tr>			
                 <?php
-                $query    =mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='-' ORDER BY id_kriteria");
+                $query    =mysqli_query($con, "SELECT * FROM pegawai_sikap ORDER BY id_sikap");
 				$no=0;
                 while ($sikap = mysqli_fetch_array($query)) {
 				$no++;	
                 ?>			
             <tr>
                 <td align="center"><?php echo $no;?></td>
-                <td><?php echo $sikap['kriteria'];?></td>
-                <td colspan="5" align="center"></td>				
+                <td name="id_kriteria[]" id="id_kriteria">&nbsp;<?php echo $sikap['nama_sikap'];?></td>
+                <td colspan="5" align="center">
+				  <select align="center" name="nilai[]" class="form-control custom-select">
+					<option value=""selected></option>					
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>					
+				  </select>				
+				</td>				
             </tr>
                 <?php
                 }
@@ -163,8 +186,17 @@
                 ?>				
             <tr>
                 <td align="center"><?php echo $no;?></td>							
-                <td><?php echo $pel['kriteria'];?></td>
-                <td colspan="5" align="center"></td>
+                <td name="id_kriteria[]" id="id_kriteria">&nbsp;<?php echo $pel['kriteria'];?></td>
+                <td colspan="5" align="center">
+				  <select align="center" name="nilai[]" class="form-control custom-select">
+					<option value=""></option>					
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>					
+				  </select>				
+				</td>
 				
             </tr>
                 <?php
@@ -195,7 +227,8 @@
           </div>
 	</footer>	  
 		<br>		  
-    </section>	
+    </section>
+</form>	
    </div>
       <!-- /.box -->
 

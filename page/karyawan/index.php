@@ -21,7 +21,7 @@
             </thead>
             <tbody>
             	<?php 
-            		$sql = "select * from pegawai where stts_kerja='K' AND stts_aktif='AKTIF' ORDER BY jbtn ASC";
+            		$sql = "select * from pegawai where stts_aktif='AKTIF' ORDER BY jbtn ASC";
             		$query = mysqli_query($con, $sql);
             		while ($row = mysqli_fetch_assoc($query)):
                   $departemen=mysqli_query($con,"SELECT * from departemen where dep_id='$row[departemen]'");
@@ -34,7 +34,7 @@
             	 	<td><?= $depar['nama'] ?></td>
             	 	<td></td>					
                 <td>
-                  <a href="#editEmployeeModal<?= $row['id'] ?>" class="View" data-toggle="modal"><i class="glyphicon glyphicon-user" data-toggle="tooltip" title="View"></i></a>
+                  <a href="#editEmployeeModal<?= $row['id'] ?>" class="View" data-toggle="modal"><button class="glyphicon glyphicon-user" data-toggle="tooltip" title="View"></button></a>
                 </td>
             	 </tr>
 
