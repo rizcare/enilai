@@ -9,9 +9,10 @@
   if (isset($_POST['simpan'])) {
 
     $kriteria = $_POST['kriteria'];
+	$jbtn = $_POST['jbtn'];
     $bidang = $_POST['bidang'];
 
-    $sql = "update pegawai_kriteria set kriteria='$kriteria', bidang='$bidang' where id_kriteria='$id'";
+    $sql = "update pegawai_kriteria set kriteria='$kriteria', jbtn='$jbtn', bidang='$bidang' where id_kriteria='$id'";
     $query = mysqli_query($con, $sql);
     if ($query) {
       echo "<script>alert('Data berhasil diubah!');window.location.href='index.php?p=criteria'</script>";
@@ -38,6 +39,10 @@
               <label for="kriteria">Kinerja</label>
               <textarea type="text" class="form-control input-lg" id="kriteria" name="kriteria" required><?= $data['kriteria'] ?></textarea>
             </div>
+            <div class="form-group">
+              <label for="viewbidang">Jabatan</label>
+              <input type="text" class="form-control input-lg" id="jbtn" value="<?= $data['jbtn'] ?>" readonly>
+            </div>			
             <div class="form-group">
               <label for="viewbidang">Bidang Sebelumnya</label>
               <input type="text" class="form-control input-lg" id="viewbidang" value="<?= $data['bidang'] ?>" readonly>

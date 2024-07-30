@@ -24,8 +24,9 @@
             <thead>
             <tr>
               <th>Id</th>
-              <th>Bidang</th>				  
-              <th>Kinerja</th>		  
+              <th>Kriteria</th>			  
+              <th>Jabatan</th>				  
+              <th>Bidang</th>		  
               <th>Aksi</th>
             </tr>
             </thead>
@@ -38,11 +39,12 @@
 
             	 ?>
             	 <tr>
-            	 	<td><?= $row['id_kriteria'] ?></td>
-					<td><?= $row['bidang'] ?></td>					
+            	 	<td><?= $row['id_kriteria'] ?></td>				
             	 	<td><?= $row['kriteria'] ?></td>
+					<td><?= $row['jbtn'] ?></td>	
+					<td><?= $row['bidang'] ?></td>						
                 <td>
-                  <a href="index.php?p=criteria&act=edit&id=<?= $row['id_kriteria'] ?>" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                  <!--<a href="index.php?p=criteria&act=edit&id=<?= $row['id_kriteria'] ?>" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>-->
                   <a href="index.php?p=criteria&delete&id=<?= $row['id_kriteria'] ?>" class="btn btn-danger" onclick="return confirm('Jika data dihapus, maka data penilian sebelumnya akan direset?')"><i class="glyphicon glyphicon-trash"></i></a>
                 
                 </td>
