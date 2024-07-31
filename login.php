@@ -14,16 +14,50 @@
     if ($row > 0) {
       if ($data['level']=='admin') {
         $_SESSION['logged'] = 1;
-      }elseif ($data['level']=='kanit') {
+      }elseif ($data['level']=='kepala_unit_administrasi') {
        $_SESSION['logged'] = 2;
-      }elseif ($data['level']=='kabag') {
+      }elseif ($data['level']=='kepala_unit_casemix') {
        $_SESSION['logged'] = 3;
-      }elseif ($data['level']=='sdm') {
+      }elseif ($data['level']=='kepala_unit_cs') {
        $_SESSION['logged'] = 4;
-      }elseif ($data['level']=='wadir') {
+      }elseif ($data['level']=='kepala_unit_driver') {
        $_SESSION['logged'] = 5;
-      }elseif ($data['level']=='direktur') {
-       $_SESSION['logged'] = 6;	   
+      }elseif ($data['level']=='kepala_unit_farmasi') {
+       $_SESSION['logged'] = 6;
+      }elseif ($data['level']=='kepala_unit_gizi') {
+       $_SESSION['logged'] = 7;
+      }elseif ($data['level']=='kepala_unit_humas_marketing') {
+       $_SESSION['logged'] = 8;
+      }elseif ($data['level']=='kepala_unit_ibs') {
+       $_SESSION['logged'] = 9;
+      }elseif ($data['level']=='kepala_unit_igd') {
+       $_SESSION['logged'] = 10;
+      }elseif ($data['level']=='kepala_unit_intensif') {
+       $_SESSION['logged'] = 11;
+      }elseif ($data['level']=='kepala_unit_ipsrs') {
+       $_SESSION['logged'] = 12;
+      }elseif ($data['level']=='kepala_unit_it') {
+       $_SESSION['logged'] = 13;
+      }elseif ($data['level']=='kepala_unit_laboratorium') {
+       $_SESSION['logged'] = 14;
+      }elseif ($data['level']=='kepala_unit_perinatologi') {
+       $_SESSION['logged'] = 15;
+      }elseif ($data['level']=='kepala_unit_ponek') {
+       $_SESSION['logged'] = 16;
+      }elseif ($data['level']=='kepala_unit_radiologi') {
+       $_SESSION['logged'] = 17;
+      }elseif ($data['level']=='kepala_unit_ranap_anak') {
+       $_SESSION['logged'] = 18;
+      }elseif ($data['level']=='kepala_unit_rawat_jalan') {
+       $_SESSION['logged'] = 19;
+      }elseif ($data['level']=='kepala_unit_rekam_medis') {
+       $_SESSION['logged'] = 20;
+      }elseif ($data['level']=='kepala_unit_rpdb') {
+       $_SESSION['logged'] = 21;
+      }elseif ($data['level']=='kepala_unit_security') {
+       $_SESSION['logged'] = 22;
+      }elseif ($data['level']=='kepala_unit_vk') {
+       $_SESSION['logged'] = 23;	   
       }else{
         $_SESSION['logged'] = null;
       }

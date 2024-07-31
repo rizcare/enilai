@@ -102,7 +102,7 @@
             </a>
           </li>
           <?php endif ?>
-          <?php if (@$_SESSION['logged'] == 2 || @$_SESSION['logged'] == 1): ?>
+          <?php if (@$_SESSION['logged'] == true): ?>
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
               <img src="#" class="user-image" alt="User Image">
@@ -130,7 +130,7 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        
+<!-- admin -->        
         <?php if (@$_SESSION['logged'] == 1): ?>
           <li class="treeview <?= (@$_GET['p']=='penilaian')?'active':'' ?>">
             <a href="#">
@@ -140,7 +140,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-<!--              <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li> -->			
+              <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li>			
               <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
               <li><a href="?p=penilaian&act=casemix"><i class="fa fa-circle-o"></i>Penilaian Casemix</a></li>
               <li><a href="?p=penilaian&act=cs"><i class="fa fa-circle-o"></i>Penilaian Clean Service</a></li>
@@ -180,7 +180,7 @@
               <li><a href="?p=user"><i class="fa fa-circle-o"></i> Data User</a></li>
             </ul>
           </li>	  		  
-<!--          <li class="treeview <?= (@$_GET['p']=='karyawan')?'active':'' ?>">
+          <li class="treeview <?= (@$_GET['p']=='karyawan')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-user-secret"></i> <span>Karyawan</span>
               <span class="pull-right-container">
@@ -191,7 +191,7 @@
               <li><a href="?p=karyawan"><i class="fa fa-circle-o"></i> Data Karyawan</a></li>
             </ul>
           </li>
--->		  
+		  
           <li class="treeview <?= (@$_GET['p']=='periode')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-clock-o"></i> <span>Periode Penilaian</span>
@@ -204,7 +204,7 @@
               <li><a href="?p=periode"><i class="fa fa-circle-o"></i> Data periode</a></li>
             </ul>
           </li>
-<!--          <li class="treeview <?= (@$_GET['p']=='criteria')?'active':'' ?>">
+          <li class="treeview <?= (@$_GET['p']=='criteria')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-list"></i> <span>Kinerja</span>
               <span class="pull-right-container">
@@ -216,8 +216,96 @@
               <li><a href="?p=criteria"><i class="fa fa-circle-o"></i> Data Kinerja</a></li>
             </ul>
           </li>
--->
         <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 2): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 3): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 4): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 5): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 6): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 7): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 8): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 9): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 10): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 11): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 12): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 13): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 14): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 15): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 16): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 17): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 18): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 19): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 20): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 21): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 22): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>
+<!-- administrasi -->		
+        <?php if (@$_SESSION['logged'] == 23): ?>
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+        <?php endif; ?>		
+		
         
         <?php if (@$_SESSION['logged'] == true): ?>
           <li class="header">OTHER</li>
