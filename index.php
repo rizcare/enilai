@@ -93,22 +93,6 @@
           
           <?php if (@$_SESSION['logged'] == 1): ?>
             <li><a class="dropdown-item" href="?p=karyawan">Data Karyawan</a></li>
-          <!-- <li><a class="dropdown-item" href="?p=alternatif">Penilaian karyawan</a></li> -->
-         <!--  <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN9igcyo_jp2dYcTSY3qY-o-CY7u4Unb3yWtDJjS5Udj0uBswAZg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?= $_SESSION['name'] ?></span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu" style="width: 100px">
-
-              <a class="dropdown-item" href="#" style="margin: 10px;font-size: 20px">Identitas</a>
-              <br>
-              <a class="dropdown-item pull-right" href="?logout" style="color: red;margin: 10px;font-size: 20px"><i class="fa fa-circle-o text-red"></i> Logout</a>
-              
-              
-              
-            </div>
-          </li> -->
 
           <?php endif ?>
           <?php if (@$_SESSION['logged'] == null):?>
@@ -119,16 +103,12 @@
           </li>
           <?php endif ?>
           <?php if (@$_SESSION['logged'] == 2 || @$_SESSION['logged'] == 1): ?>
-          <!--<li><a class="dropdown-item" href="?p=alternatif">Penilaian karyawan</a></li>-->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
               <img src="#" class="user-image" alt="User Image">
               <span class="hidden-xs"><?= $_SESSION['name'] ?></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu" style="width: 100px">
-
-              <!-- <a class="dropdown-item" href="#" style="margin: 10px;font-size: 20px">Identitas</a>
-              <br> -->
               <a class="dropdown-item pull-right" href="?logout" style="color: red;margin: 10px;font-size: 20px" onclick="return confirm('Yakin Keluar?')"><i class="fa fa-circle-o text-red"></i> Logout</a>
               
             </div>
@@ -152,6 +132,42 @@
         </li>
         
         <?php if (@$_SESSION['logged'] == 1): ?>
+          <li class="treeview <?= (@$_GET['p']=='penilaian')?'active':'' ?>">
+            <a href="#">
+              <i class="fa fa-clipboard"></i> <span>Penilaian Kepala Unit</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+<!--              <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li> -->			
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+              <li><a href="?p=penilaian&act=casemix"><i class="fa fa-circle-o"></i>Penilaian Casemix</a></li>
+              <li><a href="?p=penilaian&act=cs"><i class="fa fa-circle-o"></i>Penilaian Clean Service</a></li>
+              <li><a href="?p=penilaian&act=driver"><i class="fa fa-circle-o"></i>Penilaian Driver</a></li>
+              <li><a href="?p=penilaian&act=farmasi"><i class="fa fa-circle-o"></i>Penilaian Farmasi</a></li>
+              <li><a href="?p=penilaian&act=gizi"><i class="fa fa-circle-o"></i>Penilaian Instalasi Gizi</a></li>
+              <li><a href="?p=penilaian&act=humas"><i class="fa fa-circle-o"></i>Penilaian Humas Marketing</a></li>
+              <li><a href="?p=penilaian&act=ibs"><i class="fa fa-circle-o"></i>Penilaian IBS</a></li>
+              <li><a href="?p=penilaian&act=igd"><i class="fa fa-circle-o"></i>Penilaian IGD</a></li>
+              <li><a href="?p=penilaian&act=intensif"><i class="fa fa-circle-o"></i>Penilaian Intensif</a></li>
+              <li><a href="?p=penilaian&act=ipsrs"><i class="fa fa-circle-o"></i>Penilaian IPSRS</a></li>
+              <li><a href="?p=penilaian&act=it"><i class="fa fa-circle-o"></i>Penilaian IT</a></li>
+              <li><a href="?p=penilaian&act=kesling"><i class="fa fa-circle-o"></i>Penilaian Kesling</a></li>
+              <li><a href="?p=penilaian&act=keuangan"><i class="fa fa-circle-o"></i>Penilaian Keuangan</a></li>
+              <li><a href="?p=penilaian&act=lab"><i class="fa fa-circle-o"></i>Penilaian Laboratorium</a></li>
+              <li><a href="?p=penilaian&act=perina"><i class="fa fa-circle-o"></i>Penilaian Perinatologi</a></li>
+              <li><a href="?p=penilaian&act=ponek"><i class="fa fa-circle-o"></i>Penilaian Ponek</a></li>
+              <li><a href="?p=penilaian&act=portir"><i class="fa fa-circle-o"></i>Penilaian Portir</a></li>
+              <li><a href="?p=penilaian&act=radiologi"><i class="fa fa-circle-o"></i>Penilaian Radiologi</a></li>
+              <li><a href="?p=penilaian&act=ranap_anak"><i class="fa fa-circle-o"></i>Penilaian Ranap Anak</a></li>
+              <li><a href="?p=penilaian&act=ralan"><i class="fa fa-circle-o"></i>Penilaian Rawat Jalan</a></li>			  
+              <li><a href="?p=penilaian&act=rm"><i class="fa fa-circle-o"></i>Penilaian Rekam Medis</a></li>
+              <li><a href="?p=penilaian&act=rpdb"><i class="fa fa-circle-o"></i>Penilaian RPDB</a></li>
+              <li><a href="?p=penilaian&act=security"><i class="fa fa-circle-o"></i>Penilaian Security</a></li>
+              <li><a href="?p=penilaian&act=vk"><i class="fa fa-circle-o"></i>Penilaian VK</a></li>				  
+            </ul>
+          </li>		
           <li class="treeview <?= (@$_GET['p']=='user')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-user"></i> <span>User</span>
@@ -200,56 +216,8 @@
               <li><a href="?p=criteria"><i class="fa fa-circle-o"></i> Data Kinerja</a></li>
             </ul>
           </li>
--->		  
-          <li class="treeview <?= (@$_GET['p']=='penilaian')?'active':'' ?>">
-            <a href="#">
-              <i class="fa fa-clipboard"></i> <span>Penilaian Kepala Unit</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-<!--              <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li> -->			
-              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
-              <li><a href="?p=penilaian&act=casemix"><i class="fa fa-circle-o"></i>Penilaian Casemix</a></li>
-              <li><a href="?p=penilaian&act=cs"><i class="fa fa-circle-o"></i>Penilaian Clean Service</a></li>
-              <li><a href="?p=penilaian&act=driver"><i class="fa fa-circle-o"></i>Penilaian Driver</a></li>
-              <li><a href="?p=penilaian&act=farmasi"><i class="fa fa-circle-o"></i>Penilaian Farmasi</a></li>
-              <li><a href="?p=penilaian&act=gizi"><i class="fa fa-circle-o"></i>Penilaian Instalasi Gizi</a></li>
-              <li><a href="?p=penilaian&act=humas"><i class="fa fa-circle-o"></i>Penilaian Humas Marketing</a></li>
-              <li><a href="?p=penilaian&act=ibs"><i class="fa fa-circle-o"></i>Penilaian IBS</a></li>
-              <li><a href="?p=penilaian&act=igd"><i class="fa fa-circle-o"></i>Penilaian IGD</a></li>
-              <li><a href="?p=penilaian&act=intensif"><i class="fa fa-circle-o"></i>Penilaian Intensif</a></li>
-              <li><a href="?p=penilaian&act=ipsrs"><i class="fa fa-circle-o"></i>Penilaian IPSRS</a></li>
-              <li><a href="?p=penilaian&act=it"><i class="fa fa-circle-o"></i>Penilaian IT</a></li>
-              <li><a href="?p=penilaian&act=kesling"><i class="fa fa-circle-o"></i>Penilaian Kesling</a></li>
-              <li><a href="?p=penilaian&act=keuangan"><i class="fa fa-circle-o"></i>Penilaian Keuangan</a></li>
-              <li><a href="?p=penilaian&act=lab"><i class="fa fa-circle-o"></i>Penilaian Laboratorium</a></li>
-              <li><a href="?p=penilaian&act=perina"><i class="fa fa-circle-o"></i>Penilaian Perinatologi</a></li>
-              <li><a href="?p=penilaian&act=ponek"><i class="fa fa-circle-o"></i>Penilaian Ponek</a></li>
-              <li><a href="?p=penilaian&act=portir"><i class="fa fa-circle-o"></i>Penilaian Portir</a></li>			  
-            </ul>
-          </li>			  
- <!--         <li class="<?= (@$_GET['p']=='rank')?'active':'' ?>">
-            <a href="?p=rank">
-              <i class="fa fa-trophy"></i> <span>Ranking</span>
-            </a>
-          </li> -->
-        <?php endif; ?>
-
-<!--        <?php if (@$_SESSION['logged'] == 2): ?>
-          <li class="<?= (@$_GET['p']=='alternatif')?'active':'' ?>">
-            <a href="?p=alternatif">
-              <i class="fa fa-list"></i> <span>Alternatif</span>
-            </a>
-          </li>
-          <li class="<?= (@$_GET['p']=='rank')?'active':'' ?>">
-            <a href="?p=rank">
-              <i class="fa fa-trophy"></i> <span>Ranking</span>
-            </a>
-          </li>
-        <?php endif; ?>
 -->
+        <?php endif; ?>
         
         <?php if (@$_SESSION['logged'] == true): ?>
           <li class="header">OTHER</li>
@@ -414,7 +382,42 @@
               }else if ($action == "portir") {				  				  
                 include 'page/penilaian/portir/portir.php';
               }else if ($action == "nilai_portir") {
-                include 'page/penilaian/portir/nilai_portir.php';				
+                include 'page/penilaian/portir/nilai_portir.php';
+// radiologi				
+              }else if ($action == "radiologi") {				  				  
+                include 'page/penilaian/radiologi/radiologi.php';
+              }else if ($action == "nilai_radiologi") {
+                include 'page/penilaian/radiologi/nilai_radiologi.php';
+// ranap anak				
+              }else if ($action == "ranap_anak") {				  				  
+                include 'page/penilaian/ranap_anak/ranap_anak.php';
+              }else if ($action == "nilai_ranap_anak") {
+                include 'page/penilaian/ranap_anak/nilai_ranap_anak.php';
+// rm				
+              }else if ($action == "rm") {				  				  
+                include 'page/penilaian/rm/rm.php';
+              }else if ($action == "nilai_rm") {
+                include 'page/penilaian/rm/nilai_rm.php';
+// rpdb				
+              }else if ($action == "rpdb") {				  				  
+                include 'page/penilaian/rpdb/rpdb.php';
+              }else if ($action == "nilai_rpdb") {
+                include 'page/penilaian/rpdb/nilai_rpdb.php';
+// security				
+              }else if ($action == "security") {				  				  
+                include 'page/penilaian/security/security.php';
+              }else if ($action == "nilai_security") {
+                include 'page/penilaian/security/nilai_security.php';
+// vk				
+              }else if ($action == "vk") {				  				  
+                include 'page/penilaian/vk/vk.php';
+              }else if ($action == "nilai_vk") {
+                include 'page/penilaian/vk/nilai_vk.php';
+// rawat jalan				
+              }else if ($action == "ralan") {				  				  
+                include 'page/penilaian/ralan/ralan.php';
+              }else if ($action == "nilai_vk") {
+                include 'page/penilaian/ralan/nilai_ralan.php';				
 // semua karyawan
               }else if ($action == "nilai") {				  
                 include 'page/penilaian/semua_karyawan/penilaian.php';
