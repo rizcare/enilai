@@ -188,7 +188,7 @@
               <li><a href="?p=periode"><i class="fa fa-circle-o"></i> Data periode</a></li>
             </ul>
           </li>
-          <li class="treeview <?= (@$_GET['p']=='criteria')?'active':'' ?>">
+<!--          <li class="treeview <?= (@$_GET['p']=='criteria')?'active':'' ?>">
             <a href="#">
               <i class="fa fa-list"></i> <span>Kinerja</span>
               <span class="pull-right-container">
@@ -200,16 +200,34 @@
               <li><a href="?p=criteria"><i class="fa fa-circle-o"></i> Data Kinerja</a></li>
             </ul>
           </li>
+-->		  
           <li class="treeview <?= (@$_GET['p']=='penilaian')?'active':'' ?>">
             <a href="#">
-              <i class="fa fa-clipboard"></i> <span>Penilaian</span>
+              <i class="fa fa-clipboard"></i> <span>Penilaian Kepala Unit</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li>			
+<!--              <li><a href="?p=penilaian"><i class="fa fa-circle-o"></i> Semua Penilaian</a></li> -->			
+              <li><a href="?p=penilaian&act=administrasi"><i class="fa fa-circle-o"></i>Penilaian Administrasi</a></li>
+              <li><a href="?p=penilaian&act=casemix"><i class="fa fa-circle-o"></i>Penilaian Casemix</a></li>
+              <li><a href="?p=penilaian&act=cs"><i class="fa fa-circle-o"></i>Penilaian Clean Service</a></li>
+              <li><a href="?p=penilaian&act=driver"><i class="fa fa-circle-o"></i>Penilaian Driver</a></li>
+              <li><a href="?p=penilaian&act=farmasi"><i class="fa fa-circle-o"></i>Penilaian Farmasi</a></li>
+              <li><a href="?p=penilaian&act=gizi"><i class="fa fa-circle-o"></i>Penilaian Instalasi Gizi</a></li>
+              <li><a href="?p=penilaian&act=humas"><i class="fa fa-circle-o"></i>Penilaian Humas Marketing</a></li>
+              <li><a href="?p=penilaian&act=ibs"><i class="fa fa-circle-o"></i>Penilaian IBS</a></li>
+              <li><a href="?p=penilaian&act=igd"><i class="fa fa-circle-o"></i>Penilaian IGD</a></li>
+              <li><a href="?p=penilaian&act=intensif"><i class="fa fa-circle-o"></i>Penilaian Intensif</a></li>
+              <li><a href="?p=penilaian&act=ipsrs"><i class="fa fa-circle-o"></i>Penilaian IPSRS</a></li>
+              <li><a href="?p=penilaian&act=it"><i class="fa fa-circle-o"></i>Penilaian IT</a></li>
+              <li><a href="?p=penilaian&act=kesling"><i class="fa fa-circle-o"></i>Penilaian Kesling</a></li>
+              <li><a href="?p=penilaian&act=keuangan"><i class="fa fa-circle-o"></i>Penilaian Keuangan</a></li>
+              <li><a href="?p=penilaian&act=lab"><i class="fa fa-circle-o"></i>Penilaian Laboratorium</a></li>
+              <li><a href="?p=penilaian&act=perina"><i class="fa fa-circle-o"></i>Penilaian Perinatologi</a></li>
               <li><a href="?p=penilaian&act=ponek"><i class="fa fa-circle-o"></i>Penilaian Ponek</a></li>
+              <li><a href="?p=penilaian&act=portir"><i class="fa fa-circle-o"></i>Penilaian Portir</a></li>			  
             </ul>
           </li>			  
  <!--         <li class="<?= (@$_GET['p']=='rank')?'active':'' ?>">
@@ -307,11 +325,98 @@
               break;
 
             case 'penilaian':
-              if ($action == "ponek") {
+// ponek			
+              if ($action == "ponek") {				  
                 include 'page/penilaian/ponek/ponek.php';
               }else if ($action == "nilai_ponek") {
-                include 'page/penilaian/ponek/nilai_ponek.php';				
-              }else if ($action == "nilai") {
+                include 'page/penilaian/ponek/nilai_ponek.php';
+// administrasi				
+              }else if ($action == "administrasi") {				  				  
+                include 'page/penilaian/administrasi/administrasi.php';
+              }else if ($action == "nilai_administrasi") {
+                include 'page/penilaian/administrasi/nilai_administrasi.php';
+// casemix				
+              }else if ($action == "casemix") {				  				  
+                include 'page/penilaian/casemix/casemix.php';
+              }else if ($action == "nilai_casemix") {
+                include 'page/penilaian/casemix/nilai_casemix.php';
+// cs				
+              }else if ($action == "cs") {				  				  
+                include 'page/penilaian/cs/cs.php';
+              }else if ($action == "nilai_cs") {
+                include 'page/penilaian/cs/nilai_cs.php';
+// driver				
+              }else if ($action == "driver") {				  				  
+                include 'page/penilaian/driver/driver.php';
+              }else if ($action == "nilai_driver") {
+                include 'page/penilaian/driver/nilai_driver.php';
+// farmasi				
+              }else if ($action == "farmasi") {				  				  
+                include 'page/penilaian/farmasi/farmasi.php';
+              }else if ($action == "nilai_farmasi") {
+                include 'page/penilaian/farmasi/nilai_farmasi.php';
+// gizi				
+              }else if ($action == "gizi") {				  				  
+                include 'page/penilaian/gizi/gizi.php';
+              }else if ($action == "nilai_gizi") {
+                include 'page/penilaian/gizi/nilai_gizi.php';
+// humas marketing				
+              }else if ($action == "humas") {				  				  
+                include 'page/penilaian/humas/humas.php';
+              }else if ($action == "nilai_humas") {
+                include 'page/penilaian/humas/nilai_humas.php';
+// ibs				
+              }else if ($action == "ibs") {				  				  
+                include 'page/penilaian/ibs/ibs.php';
+              }else if ($action == "nilai_ibs") {
+                include 'page/penilaian/ibs/nilai_ibs.php';
+// igd				
+              }else if ($action == "igd") {				  				  
+                include 'page/penilaian/igd/igd.php';
+              }else if ($action == "nilai_igd") {
+                include 'page/penilaian/igd/nilai_igd.php';
+// intensif				
+              }else if ($action == "intensif") {				  				  
+                include 'page/penilaian/intensif/intensif.php';
+              }else if ($action == "nilai_intensif") {
+                include 'page/penilaian/intensif/nilai_intensif.php';
+// ipsrs				
+              }else if ($action == "ipsrs") {				  				  
+                include 'page/penilaian/ipsrs/ipsrs.php';
+              }else if ($action == "nilai_ipsrs") {
+                include 'page/penilaian/ipsrs/nilai_ipsrs.php';
+// it				
+              }else if ($action == "it") {				  				  
+                include 'page/penilaian/it/it.php';
+              }else if ($action == "nilai_it") {
+                include 'page/penilaian/it/nilai_it.php';
+// kesling				
+              }else if ($action == "kesling") {				  				  
+                include 'page/penilaian/kesling/kesling.php';
+              }else if ($action == "nilai_kesling") {
+                include 'page/penilaian/kesling/nilai_kesling.php';
+// keuangan				
+              }else if ($action == "keuangan") {				  				  
+                include 'page/penilaian/keuangan/keuangan.php';
+              }else if ($action == "nilai_keuangan") {
+                include 'page/penilaian/keuangan/nilai_keuangan.php';
+// lab				
+              }else if ($action == "lab") {				  				  
+                include 'page/penilaian/lab/lab.php';
+              }else if ($action == "nilai_lab") {
+                include 'page/penilaian/lab/nilai_lab.php';
+// perina				
+              }else if ($action == "perina") {				  				  
+                include 'page/penilaian/perina/perina.php';
+              }else if ($action == "nilai_perina") {
+                include 'page/penilaian/perina/nilai_perina.php';
+// portir				
+              }else if ($action == "portir") {				  				  
+                include 'page/penilaian/portir/portir.php';
+              }else if ($action == "nilai_portir") {
+                include 'page/penilaian/portir/nilai_portir.php';				
+// semua karyawan
+              }else if ($action == "nilai") {				  
                 include 'page/penilaian/semua_karyawan/penilaian.php';
               } else {
                 include 'page/penilaian/index.php';				

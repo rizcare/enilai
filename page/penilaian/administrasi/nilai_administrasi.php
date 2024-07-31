@@ -205,7 +205,7 @@ if (isset($_POST['simpan'])) {
                             <td colspan="6"><b>Kinerja Pelayanan<b></td>
                         </tr>
                         <?php
-                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='PONEK' ORDER BY id_kriteria");
+                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='Administrasi' ORDER BY id_kriteria");
                         $no = 0;
                         while ($kriteria = mysqli_fetch_array($query)) {
                             $no++;

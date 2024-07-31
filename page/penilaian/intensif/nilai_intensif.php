@@ -7,7 +7,9 @@ $idUser = $_SESSION['id_user'];
 $id = $_GET['id'];
 
 // user penilai
-$sqlUser = "select * from pegawai_user where id_user='$idUser'";
+$sqlUser = "select * from pegawai_user
+			left join pegawai on pegawai.nik = pegawai_user.nik
+			where id_user='$idUser'";
 $queryUser = mysqli_query($con, $sqlUser);
 
 // user dinilai
@@ -63,7 +65,7 @@ if (isset($_POST['simpan'])) {
         mysqli_commit($con);
 
         if ($query) {
-            echo "<script>alert('Data berhasil diubah!');window.location.href='index.php?p=penilaian&act=ponek'</script>";
+            echo "<script>alert('Data berhasil diubah!')</script>";
         } else {
             echo "Error : " . mysqli_error($con);
             mysqli_rollback($con);
@@ -128,7 +130,11 @@ if (isset($_POST['simpan'])) {
                             </td>
                         </tr>
                     </table>
-                    <div>
+                    <div style="display: flex; justify-content: end;">
+                        <div style="width: 50%;" align="left">
+						<input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
+                        </div>
+                        <div style="width: 50%;" align="right">
                         <select name="periode" id="periode" class="form-control input">
                             <?php
                             $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
@@ -139,7 +145,8 @@ if (isset($_POST['simpan'])) {
                             }
                             ?>
                         </select>
-                    </div>
+                        </div>
+                    </div>					
                     <table border="1" cellspacing="0" cellpadding="4" style="width: 100%;">
                         <tr bgcolor="#f3f2f2">
                             <td rowspan="3" width="3%" style="font-size: 13px;" align="center">NO</td>
@@ -198,7 +205,7 @@ if (isset($_POST['simpan'])) {
                             <td colspan="6"><b>Kinerja Pelayanan<b></td>
                         </tr>
                         <?php
-                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='PONEK' ORDER BY id_kriteria");
+                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='Intensif' ORDER BY id_kriteria");
                         $no = 0;
                         while ($kriteria = mysqli_fetch_array($query)) {
                             $no++;
