@@ -40,8 +40,7 @@
 								<td><?= $depar['nama'] ?></td>
 								<td>
 									<a href="#editEmployeeModal<?= $row['id'] ?>" class="View" data-toggle="modal"><button class="glyphicon glyphicon-user" data-toggle="tooltip" title="View"></button></a>
-									<a href="index.php?p=penilaian&id=<?= $row['id'] ?>" class="create"><button class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Penilaian"></button></a>
-									<a href="index.php?p=penilaian&=nilai_sdm&id=<?= $row['id'] ?>" class="edit"><button class="glyphicon glyphicon-home" data-toggle="tooltip" title="Penilaian"></button></a>
+									<a target="blank" href="index.php?p=pemberiannilai&act=nilai_sdm&id=<?= $row['id'] ?>" class="edit"><button class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Penilaian"></button></a>
 								</td>
 								<td></td>
 							</tr>

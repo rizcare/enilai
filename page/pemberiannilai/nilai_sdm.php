@@ -5,6 +5,7 @@ session_start();
 date_default_timezone_set('Asia/Jakarta');
 $idUser = $_SESSION['id_user'];
 $id = $_GET['id'];
+$getPeriode = $_GET['periode'] ?? 'SEMESTER 1 2024'; // pertama kali di buka
 
 // user penilai
 $sqlUser = "select * from pegawai_user
@@ -19,6 +20,7 @@ $query = mysqli_query($con, $sql);
 $peg = mysqli_fetch_array($query);
 $user = mysqli_fetch_array($queryUser);
 
+$bidang = $peg['bidang'];
 $nip = $peg['nik'];
 $penilai = $user['nik'];
 if (isset($_POST['simpan'])) {
@@ -132,21 +134,21 @@ if (isset($_POST['simpan'])) {
                     </table>
                     <div style="display: flex; justify-content: end;">
                         <div style="width: 50%;" align="left">
-						<input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
+                            <input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
                         </div>
                         <div style="width: 50%;" align="right">
-                        <select name="periode" id="periode" class="form-control input">
-                            <?php
-                            $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
-                            while ($period = mysqli_fetch_array($query)) {
-                            ?>
-                                <option align="center" value="<?= $period['label']; ?>"><?php echo $period['label']; ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
+                            <select name="periode" id="periode" class="form-control input" onchange="changePeriode(this)">
+                                <?php
+                                $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
+                                while ($period = mysqli_fetch_array($query)) {
+                                ?>
+                                    <option align="center" <?= $getPeriode == $period['label'] ? 'selected' : '' ?> value="<?= $period['label']; ?>"><?= $period['label']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                         </div>
-                    </div>					
+                    </div>
                     <table border="1" cellspacing="0" cellpadding="4" style="width: 100%;">
                         <tr bgcolor="#f3f2f2">
                             <td rowspan="3" width="3%" style="font-size: 13px;" align="center">NO</td>
@@ -177,7 +179,7 @@ if (isset($_POST['simpan'])) {
                         while ($sikap = mysqli_fetch_array($query)) {
                             $no++;
                             $sikap_id = $sikap['id_sikap'];
-                            $query_sikap = mysqli_query($con, "SELECT * FROM pegawai_nilai_sikap WHERE id_sikap=$sikap_id AND nip=$nip AND penilai=$penilai");
+                            $query_sikap = mysqli_query($con, "SELECT * FROM pegawai_nilai_sikap WHERE id_sikap=$sikap_id AND nip=$nip AND penilai=$penilai AND periode='$getPeriode'");
                             $nilai_sikap = mysqli_fetch_assoc($query_sikap);
                         ?>
                             <input type="hidden" name="id_sikap[]" value="<?= $sikap_id; ?>">
@@ -205,13 +207,13 @@ if (isset($_POST['simpan'])) {
                             <td colspan="6"><b>Kinerja Pelayanan<b></td>
                         </tr>
                         <?php
-                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='Intensif' ORDER BY id_kriteria");
+                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='$bidang' ORDER BY id_kriteria");
                         $no = 0;
                         while ($kriteria = mysqli_fetch_array($query)) {
                             $no++;
                             $kriteria_id = $kriteria['id_kriteria'];
-                            $query_kriteria = mysqli_query($con, "SELECT * FROM pegawai_nilai_kerja WHERE id_kriteria=$kriteria_id AND nip=$nip AND penilai=$penilai");
-                            $nilai_kriteria = mysqli_fetch_assoc($query_kriteria);							
+                            $query_kriteria = mysqli_query($con, "SELECT * FROM pegawai_nilai_kerja WHERE id_kriteria=$kriteria_id AND nip=$nip AND penilai=$penilai AND periode='$getPeriode'");
+                            $nilai_kriteria = mysqli_fetch_assoc($query_kriteria);
                         ?>
                             <input type="hidden" name="id_kriteria[]" value="<?= $kriteria['id_kriteria']; ?>">
                             <tr>
@@ -220,7 +222,7 @@ if (isset($_POST['simpan'])) {
                                     <a type="text" class="form-control input" id="id_kriteria"><?= $kriteria['kriteria'] ?></a>
                                 </td>
                                 <td colspan="5" align="center">
-									<select align="center" name="nilai[]" class="form-control custom-select">
+                                    <select align="center" name="nilai[]" class="form-control custom-select">
                                         <option value="" selected></option>
                                         <option value="1" <?= $nilai_kriteria['nilai'] == '1' ? 'selected' : ''; ?>>1</option>
                                         <option value="2" <?= $nilai_kriteria['nilai'] == '2' ? 'selected' : ''; ?>>2</option>
@@ -269,3 +271,20 @@ if (isset($_POST['simpan'])) {
 
 </div>
 <!-- /.row -->
+
+<script>
+    function changePeriode(selectElement) {
+        let selectedValue = selectElement.value;
+        let url = new URL(window.location.href);
+
+        if (url.searchParams.has('periode')) {
+            url.searchParams.set('periode', selectedValue);
+        } else {
+            url.searchParams.append('periode', selectedValue);
+        }
+
+        window.location.href = url;
+    }
+
+    console.log('<?= $getPeriode ?>');
+</script>

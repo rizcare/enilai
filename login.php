@@ -57,7 +57,9 @@
       }elseif ($data['level']=='kepala_unit_security') {
        $_SESSION['logged'] = 22;
       }elseif ($data['level']=='kepala_unit_vk') {
-       $_SESSION['logged'] = 23;	   
+       $_SESSION['logged'] = 23;
+      }elseif ($data['level']=='SDM') {
+       $_SESSION['logged'] = 24;	   
       }else{
         $_SESSION['logged'] = null;
       }
