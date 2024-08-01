@@ -151,109 +151,76 @@ if (isset($_POST['simpan'])) {
                     </div>
                     <table border="1" cellspacing="0" cellpadding="4" style="width: 100%;">
                         <tr bgcolor="#f3f2f2">
-                            <td rowspan="3" width="3%" style="font-size: 13px;" align="center">NO</td>
-                            <td rowspan="3" width="87%" style="font-size: 13px;" align="center">KOMPONEN PENELITIAN KINERJA</td>
-                            <td colspan="5" width="10%" style="font-size: 13px;" align="center">NILAI</td>
-                        </tr>
-                        <tr bgcolor="#f3f2f2">
-                            <td width="2%" align="center">SK</td>
-                            <td width="2%" align="center">K</td>
-                            <td width="2%" align="center">C</td>
-                            <td width="2%" align="center">B</td>
-                            <td width="2%" align="center">SB</td>
-                        </tr>
-                        <tr bgcolor="#f3f2f2">
-                            <td align="center">1</td>
-                            <td align="center">2</td>
-                            <td align="center">3</td>
-                            <td align="center">4</td>
-                            <td align="center">5</td>
+                            <td width="3%" style="font-size: 13px;" align="center">NO</td>
+                            <td width="70%" style="font-size: 13px;" align="center">Indikator Penilaian Kinerja</td>
+                            <td width="27%" style="font-size: 13px;" align="center">NILAI</td>
                         </tr>
                         <tr bgcolor="#abfead">
                             <td align="center"><b>A.<b></td>
-                            <td colspan="6"><b>Sikap Kerja<b></td>
+                            <td colspan="2"><b>&nbsp;Kedisiplinan Kehadiran<b></td>
                         </tr>
-                        <?php
-                        $query    = mysqli_query($con, "SELECT * FROM pegawai_sikap ORDER BY id_sikap");
-                        $no = 0;
-                        while ($sikap = mysqli_fetch_array($query)) {
-                            $no++;
-                            $sikap_id = $sikap['id_sikap'];
-                            $query_sikap = mysqli_query($con, "SELECT * FROM pegawai_nilai_sikap WHERE id_sikap=$sikap_id AND nip=$nip AND penilai=$penilai AND periode='$getPeriode'");
-                            $nilai_sikap = mysqli_fetch_assoc($query_sikap);
-                        ?>
-                            <input type="hidden" name="id_sikap[]" value="<?= $sikap_id; ?>">
-                            <tr>
-                                <td align="center"><?php echo $no; ?></td>
-                                <td>
-                                    <a type="text" class="form-control input" id="id_sikap"><?= $sikap['nama_sikap'] ?></a>
-                                </td>
-                                <td colspan="5" align="center">
-                                    <select align="center" name="nilai_sikap[]" class="form-control custom-select">
-                                        <option value="" selected></option>
-                                        <option value="1" <?= $nilai_sikap['nilai'] == '1' ? 'selected' : ''; ?>>1</option>
-                                        <option value="2" <?= $nilai_sikap['nilai'] == '2' ? 'selected' : ''; ?>>2</option>
-                                        <option value="3" <?= $nilai_sikap['nilai'] == '3' ? 'selected' : ''; ?>>3</option>
-                                        <option value="4" <?= $nilai_sikap['nilai'] == '4' ? 'selected' : ''; ?>>4</option>
-                                        <option value="5" <?= $nilai_sikap['nilai'] == '5' ? 'selected' : ''; ?>>5</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
+                        <tr>
+                            <td align="center">1</td>
+                            <td>&nbsp;Alfa</td>
+							<td></td>
+                        </tr>
+                        <tr>
+                            <td align="center">2</td>
+                            <td>&nbsp;Sakit</td>
+							<td></td>
+                        </tr>
+                        <tr>
+                            <td align="center">3</td>
+                            <td>&nbsp;Keterlambatan</td>
+							<td></td>
+                        </tr>
+                        <tr>
+                            <td align="center">4</td>
+                            <td>&nbsp;Pulang Cepat</td>
+							<td></td>
+                        </tr>						
                         <tr bgcolor="#abfead">
                             <td align="center"><b>B.<b></td>
-                            <td colspan="6"><b>Kinerja Pelayanan<b></td>
+                            <td colspan="2"><b>&nbsp;Pelanggaran<b></td>
                         </tr>
-                        <?php
-                        $query    = mysqli_query($con, "SELECT * FROM pegawai_kriteria where bidang='$bidang' ORDER BY id_kriteria");
-                        $no = 0;
-                        while ($kriteria = mysqli_fetch_array($query)) {
-                            $no++;
-                            $kriteria_id = $kriteria['id_kriteria'];
-                            $query_kriteria = mysqli_query($con, "SELECT * FROM pegawai_nilai_kerja WHERE id_kriteria=$kriteria_id AND nip=$nip AND penilai=$penilai AND periode='$getPeriode'");
-                            $nilai_kriteria = mysqli_fetch_assoc($query_kriteria);
-                        ?>
-                            <input type="hidden" name="id_kriteria[]" value="<?= $kriteria['id_kriteria']; ?>">
-                            <tr>
-                                <td align="center"><?php echo $no; ?></td>
-                                <td>
-                                    <a type="text" class="form-control input" id="id_kriteria"><?= $kriteria['kriteria'] ?></a>
-                                </td>
-                                <td colspan="5" align="center">
-                                    <select align="center" name="nilai[]" class="form-control custom-select">
-                                        <option value="" selected></option>
-                                        <option value="1" <?= $nilai_kriteria['nilai'] == '1' ? 'selected' : ''; ?>>1</option>
-                                        <option value="2" <?= $nilai_kriteria['nilai'] == '2' ? 'selected' : ''; ?>>2</option>
-                                        <option value="3" <?= $nilai_kriteria['nilai'] == '3' ? 'selected' : ''; ?>>3</option>
-                                        <option value="4" <?= $nilai_kriteria['nilai'] == '4' ? 'selected' : ''; ?>>4</option>
-                                        <option value="5" <?= $nilai_kriteria['nilai'] == '5' ? 'selected' : ''; ?>>5</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
                         <tr>
-                            <td colspan="2" align="center"><b>Jumlah Nilai</b></td>
-                            <td colspan="5" align="center"></td>
-
+                            <td align="center">1</td>
+                            <td>&nbsp;Pelanggaran Ringan</td>
+							<td></td>
                         </tr>
+                        <tr>
+                            <td align="center">2</td>
+                            <td>&nbsp;Pelanggaran Sedang</td>
+							<td></td>
+                        </tr>
+                        <tr>
+                            <td align="center">3</td>
+                            <td>&nbsp;Pelanggaran Berat</td>
+							<td></td>
+                        </tr>						
+                        <tr bgcolor="#abfead">
+                            <td align="center"><b>C.<b></td>
+                            <td colspan="2"><b>&nbsp;Surat Peringatan<b></td>
+                        </tr>
+                        <tr>
+                            <td align="center">1</td>
+                            <td>&nbsp;Surat Peringatan ke 1 (satu)</td>
+							<td></td>
+                        </tr>
+                        <tr>
+                            <td align="center">2</td>
+                            <td>&nbsp;Surat Peringatan ke 2 (dua)</td>
+							<td></td>
+                        </tr>
+                        <tr>
+                            <td align="center">3</td>
+                            <td>&nbsp;Surat Peringatan ke 3 (tiga)</td>
+							<td></td>
+                        </tr>						
                     </table>
                     <br>
                     <footer style="display: flex; justify-content: end;">
                         <div style="width: 50%;" align="left">
-                            <b>
-                                Keterangan :
-                                (
-                                <font color="#bd1e1e">SK</font> = <font color="#bd1e1e">Sangat Kurang</font>,
-                                <font color="#ca862d"> K</font> = <font color="#ca862d">Kurang</font>,
-                                <font color="orange"> C</font> = <font color="orange">Cukup</font>,
-                                <font color="#50b86b"> B</font> = <font color="#50b86b">Baik</font>,
-                                <font color="#0a8a2b"> SB</font> = <font color="#0a8a2b">Sangat Baik</font>
-                                )
-                            </b>
                         </div>
                         <div style="width: 50%;" align="right">
                             <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>
