@@ -23,31 +23,61 @@ $user = mysqli_fetch_array($queryUser);
 $bidang = $peg['bidang'];
 $nip = $peg['nik'];
 $penilai = $user['nik'];
-
-	if (isset($_POST['simpan'])) {
-
+if (isset($_POST['simpan'])) {
+    $id_kriteria = $_POST['id_kriteria'];
+    $id_sikap = $_POST['id_sikap'];
     $periode = $_POST['periode'];
     $tgl_jam = date('Y-m-d H:i:s'); // waktu sekarang
-    $sakit = $_POST['sakit'];
-	$keterlambatan = $_POST['keterlambatan'];
-	$pulang_cepat = $_POST['pulang_cepat'];
-	$pelanggaran_ringan = $_POST['pelanggaran_ringan'];
-	$pelanggaran_sedang = $_POST['pelanggaran_sedang'];
-	$pelanggaran_berat = $_POST['pelanggaran_berat'];
-	$sp1 = $_POST['sp1'];
-	$sp2 = $_POST['sp2'];
-	$sp3 = $_POST['sp3'];
-	$catatan = $_POST['catatan'];
+    $nilai = $_POST['nilai'];
+    $nilai_sikap = $_POST['nilai_sikap'];
 
-		$sql = "insert into pegawai_nilai_sdm values(null,'$periode', '$tgl_jam', '$nip', '$sakit', '$keterlambatan', '$pulang_cepat', '$pelanggaran_ringan', '$pelanggaran_sedang', '$pelanggaran_berat', '$sp1', '$sp2', '$sp3', '$catatan', '$penilai')";
-		$sdm = mysqli_query($con, $sql);
-		if ($sdm) {
-			echo "<script>alert('Data berhasil diubah!')</script>";
-		} else {
-			echo "Error : " . mysqli_error($con);
-		}
-	}
- ?>
+    try {
+        mysqli_begin_transaction($con);
+        // sikap
+        for ($i = 0; $i < count($id_sikap); $i++) {
+            if ($nilai_sikap[$i]) {
+                // Cek apakah data sudah ada
+                $result = mysqli_query($con, "SELECT * FROM pegawai_nilai_sikap WHERE id_sikap='$id_sikap[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'");
+
+                if (mysqli_num_rows($result) > 0) {
+                    $query = "UPDATE pegawai_nilai_sikap SET nilai='$nilai_sikap[$i]', tgl_jam='$tgl_jam' WHERE id_sikap='$id_sikap[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'";
+                } else {
+                    $query = "INSERT INTO pegawai_nilai_sikap (id_sikap, periode, tgl_jam, nip, nilai, penilai) VALUES ('$id_sikap[$i]', '$periode', '$tgl_jam', '$nip', '$nilai_sikap[$i]', '$penilai')";
+                }
+
+                mysqli_query($con, $query);
+            }
+        }
+
+        // kriteria
+        for ($i = 0; $i < count($id_kriteria); $i++) {
+            if ($nilai[$i]) {
+                // Cek apakah data sudah ada
+                $result = mysqli_query($con, "SELECT * FROM pegawai_nilai_kerja WHERE id_kriteria='$id_kriteria[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'");
+
+                if (mysqli_num_rows($result) > 0) {
+                    $query = "UPDATE pegawai_nilai_kerja SET nilai='$nilai[$i]', tgl_jam='$tgl_jam' WHERE id_kriteria='$id_kriteria[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'";
+                } else {
+                    $query = "INSERT INTO pegawai_nilai_kerja (id_kriteria, periode, tgl_jam, nip, nilai, penilai) VALUES ('$id_kriteria[$i]', '$periode', '$tgl_jam', '$nip', '$nilai[$i]', '$penilai')";
+                }
+
+                mysqli_query($con, $query);
+            }
+        }
+        mysqli_commit($con);
+
+        if ($query) {
+            echo "<script>alert('Data berhasil diubah!')</script>";
+        } else {
+            echo "Error : " . mysqli_error($con);
+            mysqli_rollback($con);
+        }
+    } catch (\Throwable $th) {
+        mysqli_rollback($con);
+        echo "Error : " . mysqli_error($con);
+    }
+}
+?>
 
 <div class="row">
     <!-- left column -->
@@ -93,52 +123,8 @@ $penilai = $user['nik'];
                     </table>
                 </div>
             </header>
-
-                    <div style="display: flex; justify-content: end;">
-                        <div style="width: 50%;" align="left">
-                            <input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
-                        </div>
-                        <div style="width: 50%;" align="right">
-                            <select name="periode" id="periode" class="form-control input" onchange="changePeriode(this)">
-                                <?php
-                                $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
-                                while ($period = mysqli_fetch_array($query)) {
-                                ?>
-                                    <option align="center" <?= $getPeriode == $period['label'] ? 'selected' : '' ?> value="<?= $period['label']; ?>"><?= $period['label']; ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>			
-<br>
-<!-- Penilaian Kepala Unit -->
-      <div class="box box-primary box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title"> Penilaian Kepala Unit</h3>
-              <div class="box-tools pull-right">
-                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-              </div><!-- /.box-tools -->
-          </div>
-
-            <div class="box-body table-responsive collapse">
-                    <div style="display: flex; justify-content: end;">
-                        <div style="width: 50%;" align="left">
-                            <input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
-                        </div>
-                        <div style="width: 50%;" align="right">
-                            <select name="periode" id="periode" class="form-control input" onchange="changePeriode(this)">
-                                <?php
-                                $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
-                                while ($period = mysqli_fetch_array($query)) {
-                                ?>
-                                    <option align="center" <?= $getPeriode == $period['label'] ? 'selected' : '' ?> value="<?= $period['label']; ?>"><?= $period['label']; ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>			
+            <form role="form" method="post">
+                <section>
                     <table border="1" cellspacing="0" cellpadding="5" style="width: 100%;">
                         <tr>
                             <td colspan="9" style="background-color:#005456; color:#fff; text-align: center;font-weight: bold;">
@@ -146,6 +132,23 @@ $penilai = $user['nik'];
                             </td>
                         </tr>
                     </table>
+                    <div style="display: flex; justify-content: end;">
+                        <div style="width: 50%;" align="left">
+                            <input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
+                        </div>
+                        <div style="width: 50%;" align="right">
+                            <select name="periode" id="periode" class="form-control input" onchange="changePeriode(this)">
+                                <?php
+                                $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
+                                while ($period = mysqli_fetch_array($query)) {
+                                ?>
+                                    <option align="center" <?= $getPeriode == $period['label'] ? 'selected' : '' ?> value="<?= $period['label']; ?>"><?= $period['label']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                     <table border="1" cellspacing="0" cellpadding="4" style="width: 100%;">
                         <tr bgcolor="#f3f2f2">
                             <td rowspan="3" width="3%" style="font-size: 13px;" align="center">NO</td>
@@ -179,13 +182,14 @@ $penilai = $user['nik'];
                             $query_sikap = mysqli_query($con, "SELECT * FROM pegawai_nilai_sikap WHERE id_sikap=$sikap_id AND nip=$nip AND penilai=$penilai AND periode='$getPeriode'");
                             $nilai_sikap = mysqli_fetch_assoc($query_sikap);
                         ?>
+                            <input type="hidden" name="id_sikap[]" value="<?= $sikap_id; ?>">
                             <tr>
                                 <td align="center"><?php echo $no; ?></td>
                                 <td>
-                                    <a type="text" class="form-control input" ><?= $sikap['nama_sikap'] ?></a>
+                                    <a type="text" class="form-control input" id="id_sikap"><?= $sikap['nama_sikap'] ?></a>
                                 </td>
                                 <td colspan="5" align="center">
-                                    <select align="center" class="form-control custom-select">
+                                    <select align="center" name="nilai_sikap[]" class="form-control custom-select">
                                         <option value="" selected></option>
                                         <option value="1" <?= $nilai_sikap['nilai'] == '1' ? 'selected' : ''; ?>>1</option>
                                         <option value="2" <?= $nilai_sikap['nilai'] == '2' ? 'selected' : ''; ?>>2</option>
@@ -211,14 +215,14 @@ $penilai = $user['nik'];
                             $query_kriteria = mysqli_query($con, "SELECT * FROM pegawai_nilai_kerja WHERE id_kriteria=$kriteria_id AND nip=$nip AND penilai=$penilai AND periode='$getPeriode'");
                             $nilai_kriteria = mysqli_fetch_assoc($query_kriteria);
                         ?>
-                            <input type="hidden" value="<?= $kriteria['id_kriteria']; ?>">
+                            <input type="hidden" name="id_kriteria[]" value="<?= $kriteria['id_kriteria']; ?>">
                             <tr>
                                 <td align="center"><?php echo $no; ?></td>
                                 <td>
-                                    <a type="text" class="form-control input"><?= $kriteria['kriteria'] ?></a>
+                                    <a type="text" class="form-control input" id="id_kriteria"><?= $kriteria['kriteria'] ?></a>
                                 </td>
                                 <td colspan="5" align="center">
-                                    <select align="center" class="form-control custom-select">
+                                    <select align="center" name="nilai[]" class="form-control custom-select">
                                         <option value="" selected></option>
                                         <option value="1" <?= $nilai_kriteria['nilai'] == '1' ? 'selected' : ''; ?>>1</option>
                                         <option value="2" <?= $nilai_kriteria['nilai'] == '2' ? 'selected' : ''; ?>>2</option>
@@ -237,7 +241,9 @@ $penilai = $user['nik'];
 
                         </tr>
                     </table>
-                        <div>
+                    <br>
+                    <footer style="display: flex; justify-content: end;">
+                        <div style="width: 50%;" align="left">
                             <b>
                                 Keterangan :
                                 (
@@ -248,154 +254,14 @@ $penilai = $user['nik'];
                                 <font color="#0a8a2b"> SB</font> = <font color="#0a8a2b">Sangat Baik</font>
                                 )
                             </b>
-                        </div>					
-            </div>
-      </div>
-<!-- Penilaian SDM -->
-      <div class="box box-primary box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Penilaian SDM</h3>
-              <div class="box-tools pull-right">
-                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-              </div><!-- /.box-tools -->
-          </div>
-
-            <div class="box-body table-responsive">
-            <form role="form" method="post">
-                    <table border="1" cellspacing="0" cellpadding="5" style="width: 100%;">
-                        <tr>
-                            <td colspan="9" style="background-color:#005456; color:#fff; text-align: center;font-weight: bold;">
-                                PENILAIAN KINERJA RUMAH SAKIT MITRA HUSADA
-                            </td>
-                        </tr>
-                    </table>
-                    <div style="display: flex; justify-content: end;">
-                        <div style="width: 50%;" align="left">
-                            <input align="center" class="form-control input" value="Penilai : <?= $user['nama']; ?>" readonly></input>
-                        </div>
-                        <div style="width: 50%;" align="right">
-                            <select name="periode" id="periode" class="form-control input" onchange="changePeriode(this)">
-                                <?php
-                                $query    = mysqli_query($con, "SELECT * FROM pegawai_periode ORDER BY label");
-                                while ($period = mysqli_fetch_array($query)) {
-                                ?>
-                                    <option align="center" <?= $getPeriode == $period['label'] ? 'selected' : '' ?> value="<?= $period['label']; ?>"><?= $period['label']; ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <table border="1" cellspacing="0" cellpadding="4" style="width: 100%;">
-                        <tr bgcolor="#f3f2f2">
-                            <td width="3%" style="font-size: 13px;" align="center">NO</td>
-                            <td width="70%" style="font-size: 13px;" align="center">Indikator Penilaian Kinerja</td>
-                            <td width="27%" style="font-size: 13px;" align="center">NILAI</td>
-                        </tr>
-                        <tr bgcolor="#abfead">
-                            <td align="center"><b>A.<b></td>
-                            <td colspan="2"><b>&nbsp;Kedisiplinan Kehadiran<b></td>
-                        </tr>
-                        <tr>
-                            <td align="center">1</td>
-                            <td>&nbsp;Alfa</td>
-							<td>
-								<input style="text-align:center;" type="text" class="form-control" id="alfa" name="alfa" value="<?= $sdm['alfa'] ?>">							
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">2</td>
-                            <td>&nbsp;Sakit</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="sakit" name="sakit" value="<?= $sdm['sakit'] ?>">
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">3</td>
-                            <td>&nbsp;Keterlambatan</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="keterlambatan" name="keterlambatan" value="<?= $sdm['keterlambatan'] ?>">
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">4</td>
-                            <td>&nbsp;Pulang Cepat</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="pulang_cepat" name="pulang_cepat" value="<?= $sdm['pulang_cepat'] ?>">
-							</td>
-                        </tr>						
-                        <tr bgcolor="#abfead">
-                            <td align="center"><b>B.<b></td>
-                            <td colspan="2"><b>&nbsp;Pelanggaran<b></td>
-                        </tr>
-                        <tr>
-                            <td align="center">1</td>
-                            <td>&nbsp;Pelanggaran Ringan</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="pelanggaran_ringan" name="pelanggaran_ringan" value="<?= $sdm['pelanggaran_ringan'] ?>">
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">2</td>
-                            <td>&nbsp;Pelanggaran Sedang</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="pelanggaran_sedang" name="pelanggaran_sedang" value="<?= $sdm['pelanggaran_sedang'] ?>">
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">3</td>
-                            <td>&nbsp;Pelanggaran Berat</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="pelanggaran_berat" name="pelanggaran_berat" value="<?= $sdm['pelanggaran_berat'] ?>">
-							</td>
-                        </tr>						
-                        <tr bgcolor="#abfead">
-                            <td align="center"><b>C.<b></td>
-                            <td colspan="2"><b>&nbsp;Surat Peringatan<b></td>
-                        </tr>
-                        <tr>
-                            <td align="center">1</td>
-                            <td>&nbsp;Surat Peringatan ke 1 (satu)</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="sp1" name="sp1" value="<?= $sdm['sp1'] ?>">
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">2</td>
-                            <td>&nbsp;Surat Peringatan ke 2 (dua)</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="sp2" name="sp2" value="<?= $sdm['sp2'] ?>">
-							</td>
-                        </tr>
-                        <tr>
-                            <td align="center">3</td>
-                            <td>&nbsp;Surat Peringatan ke 3 (tiga)</td>
-							<td>
-							<input style="text-align:center;" type="text" class="form-control" id="sp3" name="sp3" value="<?= $sdm['sp3'] ?>">
-							</td>
-                        </tr>
-                        <tr bgcolor="#abfead">
-                            <td align="center" colspan="3"><b>&nbsp;Catatan<b></td>
-                        </tr>
-                        <tr bgcolor="#abfead">
-							<td colspan="3">
-							<textarea type="text" class="form-control" id="catatan" name="catatan" value="<?= $sdm['catatan'] ?>"></textarea>
-							</td>
-                        </tr>						
-                    </table>
-                    <br>
-                    <footer style="display: flex; justify-content: end;">
-                        <div style="width: 50%;" align="left">
                         </div>
                         <div style="width: 50%;" align="right">
                             <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>
                         </div>
                     </footer>
                     <br>
+                </section>
             </form>
-            </div>
-
-      </div>
         </div>
         <!-- /.box -->
 

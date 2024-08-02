@@ -59,7 +59,23 @@
       }elseif ($data['level']=='kepala_unit_vk') {
        $_SESSION['logged'] = 23;
       }elseif ($data['level']=='SDM') {
-       $_SESSION['logged'] = 24;	   
+       $_SESSION['logged'] = 24;
+      }elseif ($data['level']=='kabag_keuangan') {
+       $_SESSION['logged'] = 25;
+      }elseif ($data['level']=='kabag_sdm') {
+       $_SESSION['logged'] = 26;
+      }elseif ($data['level']=='kabag_umum') {
+       $_SESSION['logged'] = 27;
+      }elseif ($data['level']=='kabid_pelayanan') {
+       $_SESSION['logged'] = 28;
+      }elseif ($data['level']=='kabid_penunjang') {
+       $_SESSION['logged'] = 29;
+      }elseif ($data['level']=='wadir_pelayanan') {
+       $_SESSION['logged'] = 30;
+      }elseif ($data['level']=='wadir_umum') {
+       $_SESSION['logged'] = 31;
+      }elseif ($data['level']=='direktur') {
+       $_SESSION['logged'] = 32;	   
       }else{
         $_SESSION['logged'] = null;
       }
