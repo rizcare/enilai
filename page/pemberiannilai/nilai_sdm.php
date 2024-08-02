@@ -23,61 +23,31 @@ $user = mysqli_fetch_array($queryUser);
 $bidang = $peg['bidang'];
 $nip = $peg['nik'];
 $penilai = $user['nik'];
-if (isset($_POST['simpan'])) {
-    $id_kriteria = $_POST['id_kriteria'];
-    $id_sikap = $_POST['id_sikap'];
+
+	if (isset($_POST['simpan'])) {
+
     $periode = $_POST['periode'];
     $tgl_jam = date('Y-m-d H:i:s'); // waktu sekarang
-    $nilai = $_POST['nilai'];
-    $nilai_sikap = $_POST['nilai_sikap'];
+    $sakit = $_POST['sakit'];
+	$keterlambatan = $_POST['keterlambatan'];
+	$pulang_cepat = $_POST['pulang_cepat'];
+	$pelanggaran_ringan = $_POST['pelanggaran_ringan'];
+	$pelanggaran_sedang = $_POST['pelanggaran_sedang'];
+	$pelanggaran_berat = $_POST['pelanggaran_berat'];
+	$sp1 = $_POST['sp1'];
+	$sp2 = $_POST['sp2'];
+	$sp3 = $_POST['sp3'];
+	$catatan = $_POST['catatan'];
 
-    try {
-        mysqli_begin_transaction($con);
-        // sikap
-        for ($i = 0; $i < count($id_sikap); $i++) {
-            if ($nilai_sikap[$i]) {
-                // Cek apakah data sudah ada
-                $result = mysqli_query($con, "SELECT * FROM pegawai_nilai_sikap WHERE id_sikap='$id_sikap[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'");
-
-                if (mysqli_num_rows($result) > 0) {
-                    $query = "UPDATE pegawai_nilai_sikap SET nilai='$nilai_sikap[$i]', tgl_jam='$tgl_jam' WHERE id_sikap='$id_sikap[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'";
-                } else {
-                    $query = "INSERT INTO pegawai_nilai_sikap (id_sikap, periode, tgl_jam, nip, nilai, penilai) VALUES ('$id_sikap[$i]', '$periode', '$tgl_jam', '$nip', '$nilai_sikap[$i]', '$penilai')";
-                }
-
-                mysqli_query($con, $query);
-            }
-        }
-
-        // kriteria
-        for ($i = 0; $i < count($id_kriteria); $i++) {
-            if ($nilai[$i]) {
-                // Cek apakah data sudah ada
-                $result = mysqli_query($con, "SELECT * FROM pegawai_nilai_kerja WHERE id_kriteria='$id_kriteria[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'");
-
-                if (mysqli_num_rows($result) > 0) {
-                    $query = "UPDATE pegawai_nilai_kerja SET nilai='$nilai[$i]', tgl_jam='$tgl_jam' WHERE id_kriteria='$id_kriteria[$i]' AND periode='$periode' AND nip='$nip' AND penilai='$penilai'";
-                } else {
-                    $query = "INSERT INTO pegawai_nilai_kerja (id_kriteria, periode, tgl_jam, nip, nilai, penilai) VALUES ('$id_kriteria[$i]', '$periode', '$tgl_jam', '$nip', '$nilai[$i]', '$penilai')";
-                }
-
-                mysqli_query($con, $query);
-            }
-        }
-        mysqli_commit($con);
-
-        if ($query) {
-            echo "<script>alert('Data berhasil diubah!')</script>";
-        } else {
-            echo "Error : " . mysqli_error($con);
-            mysqli_rollback($con);
-        }
-    } catch (\Throwable $th) {
-        mysqli_rollback($con);
-        echo "Error : " . mysqli_error($con);
-    }
-}
-?>
+		$sql = "insert into pegawai_nilai_sdm values(null,'$periode', '$tgl_jam', '$nip', '$sakit', '$keterlambatan', '$pulang_cepat', '$pelanggaran_ringan', '$pelanggaran_sedang', '$pelanggaran_berat', '$sp1', '$sp2', '$sp3', '$catatan', '$penilai')";
+		$sdm = mysqli_query($con, $sql);
+		if ($sdm) {
+			echo "<script>alert('Data berhasil diubah!')</script>";
+		} else {
+			echo "Error : " . mysqli_error($con);
+		}
+	}
+ ?>
 
 <div class="row">
     <!-- left column -->
@@ -162,22 +132,30 @@ if (isset($_POST['simpan'])) {
                         <tr>
                             <td align="center">1</td>
                             <td>&nbsp;Alfa</td>
-							<td></td>
+							<td>
+								<input style="text-align:center;" type="text" class="form-control" id="alfa" name="alfa" value="<?= $sdm['alfa'] ?>">							
+							</td>
                         </tr>
                         <tr>
                             <td align="center">2</td>
                             <td>&nbsp;Sakit</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="sakit" name="sakit" value="<?= $sdm['sakit'] ?>">
+							</td>
                         </tr>
                         <tr>
                             <td align="center">3</td>
                             <td>&nbsp;Keterlambatan</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="keterlambatan" name="keterlambatan" value="<?= $sdm['keterlambatan'] ?>">
+							</td>
                         </tr>
                         <tr>
                             <td align="center">4</td>
                             <td>&nbsp;Pulang Cepat</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="pulang_cepat" name="pulang_cepat" value="<?= $sdm['pulang_cepat'] ?>">
+							</td>
                         </tr>						
                         <tr bgcolor="#abfead">
                             <td align="center"><b>B.<b></td>
@@ -186,17 +164,23 @@ if (isset($_POST['simpan'])) {
                         <tr>
                             <td align="center">1</td>
                             <td>&nbsp;Pelanggaran Ringan</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="pelanggaran_ringan" name="pelanggaran_ringan" value="<?= $sdm['pelanggaran_ringan'] ?>">
+							</td>
                         </tr>
                         <tr>
                             <td align="center">2</td>
                             <td>&nbsp;Pelanggaran Sedang</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="pelanggaran_sedang" name="pelanggaran_sedang" value="<?= $sdm['pelanggaran_sedang'] ?>">
+							</td>
                         </tr>
                         <tr>
                             <td align="center">3</td>
                             <td>&nbsp;Pelanggaran Berat</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="pelanggaran_berat" name="pelanggaran_berat" value="<?= $sdm['pelanggaran_berat'] ?>">
+							</td>
                         </tr>						
                         <tr bgcolor="#abfead">
                             <td align="center"><b>C.<b></td>
@@ -205,17 +189,31 @@ if (isset($_POST['simpan'])) {
                         <tr>
                             <td align="center">1</td>
                             <td>&nbsp;Surat Peringatan ke 1 (satu)</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="sp1" name="sp1" value="<?= $sdm['sp1'] ?>">
+							</td>
                         </tr>
                         <tr>
                             <td align="center">2</td>
                             <td>&nbsp;Surat Peringatan ke 2 (dua)</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="sp2" name="sp2" value="<?= $sdm['sp2'] ?>">
+							</td>
                         </tr>
                         <tr>
                             <td align="center">3</td>
                             <td>&nbsp;Surat Peringatan ke 3 (tiga)</td>
-							<td></td>
+							<td>
+							<input style="text-align:center;" type="text" class="form-control" id="sp3" name="sp3" value="<?= $sdm['sp3'] ?>">
+							</td>
+                        </tr>
+                        <tr bgcolor="#abfead">
+                            <td align="center" colspan="3"><b>&nbsp;Catatan<b></td>
+                        </tr>
+                        <tr bgcolor="#abfead">
+							<td colspan="3">
+							<textarea type="text" class="form-control" id="catatan" name="catatan" value="<?= $sdm['catatan'] ?>"></textarea>
+							</td>
                         </tr>						
                     </table>
                     <br>

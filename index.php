@@ -283,7 +283,7 @@ if (isset($_GET['logout'])) {
           <?php endif; ?>
           <!-- SDM -->
           <?php if (@$_SESSION['logged'] == 24) : ?>
-            <li><a href="?p=pemberiannilai"><i class="fa fa-circle-o"></i>Penilaian SDM</a></li>
+            <li><a href="?p=pemberiannilai"><i class="fa fa-user-secret"></i><span>Penilaian SDM</span></a></li>
           <?php endif; ?>		  
 
 
