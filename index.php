@@ -284,6 +284,38 @@ if (isset($_GET['logout'])) {
           <!-- SDM -->
           <?php if (@$_SESSION['logged'] == 24) : ?>
             <li><a href="?p=pemberiannilai"><i class="fa fa-user-secret"></i><span>Penilaian SDM</span></a></li>
+          <?php endif; ?>
+          <!-- Kabag Keuangan -->
+          <?php if (@$_SESSION['logged'] == 25) : ?>
+            <li><a href="?p=kabag"><i class="fa fa-user-secret"></i><span>Penilaian SDM</span></a></li>
+          <?php endif; ?>		  
+          <!-- Kabag SDM -->
+          <?php if (@$_SESSION['logged'] == 26) : ?>
+            <li><a href="?p=kabag"><i class="fa fa-user-secret"></i><span>Penilaian Keuangan</span></a></li>
+          <?php endif; ?>
+          <!-- Kabag Umum -->
+          <?php if (@$_SESSION['logged'] == 27) : ?>
+            <li><a href="?p=kabag"><i class="fa fa-user-secret"></i><span>Penilaian Umum</span></a></li>
+          <?php endif; ?>
+          <!-- Kabid Peleyanan -->
+          <?php if (@$_SESSION['logged'] == 28) : ?>
+            <li><a href="?p=kabag"><i class="fa fa-user-secret"></i><span>Penilaian Pelayanan</span></a></li>
+          <?php endif; ?>
+          <!-- Kabid Penunjang -->
+          <?php if (@$_SESSION['logged'] == 29) : ?>
+            <li><a href="?p=kabag"><i class="fa fa-user-secret"></i><span>Penilaian Penunjang</span></a></li>
+          <?php endif; ?>
+          <!-- Wadir Pelayanan -->
+          <?php if (@$_SESSION['logged'] == 30) : ?>
+            <li><a href="?p=wadir"><i class="fa fa-user-secret"></i><span>Penilaian Pelayanan</span></a></li>
+          <?php endif; ?>
+          <!-- Wadir Umum -->
+          <?php if (@$_SESSION['logged'] == 31) : ?>
+            <li><a href="?p=wadir"><i class="fa fa-user-secret"></i><span>Penilaian Umum</span></a></li>
+          <?php endif; ?>
+          <!-- Direktur -->
+          <?php if (@$_SESSION['logged'] == 32) : ?>
+            <li><a href="?p=kabag"><i class="fa fa-user-secret"></i><span>Validasi</span></a></li>
           <?php endif; ?>		  
 
 
@@ -337,6 +369,22 @@ if (isset($_GET['logout'])) {
               include 'page/pemberiannilai/index.php';
             }
             break;
+			
+          case 'kabag':
+            if ($action == "nilai_kabag") {
+              include 'page/kabag/nilai_kabag.php';
+            } else {
+              include 'page/kabag/index.php';
+            }
+            break;
+
+          case 'wadir':
+            if ($action == "nilai_wadir") {
+              include 'page/wadir/nilai_wadir.php';
+            } else {
+              include 'page/wadir/index.php';
+            }
+            break;			
 
           case 'karyawan':
             if ($action == "create") {

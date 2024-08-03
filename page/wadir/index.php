@@ -26,7 +26,7 @@
 							$sortir = $_GET['act'];
 							$sql = "select * from pegawai where stts_aktif='AKTIF' AND bidang='$sortir' ORDER BY jbtn ASC";
 						} else {
-							$sql = "select * from pegawai where stts_aktif='AKTIF' ORDER BY jbtn ASC";
+							$sql = "select * from pegawai where stts_aktif='AKTIF' AND departemen in('012','013','026') ORDER BY jbtn ASC";
 						}
 						$query = mysqli_query($con, $sql);
 						while ($row = mysqli_fetch_assoc($query)) :
